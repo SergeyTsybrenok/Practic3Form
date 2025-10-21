@@ -79,6 +79,33 @@ form {
 .small-container {
 }
 
+.grid-title {
+    width: 100%;
+    padding-bottom: 1em;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.image-description {
+}
+
+img {
+    margin-left: 1em;
+    margin-right: 1em;
+    transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition-duration: 80ms;
+
+}
+
+img:hover {
+    scale: 1.1;
+
+}
+
 
 .input-text, .input-date{
     width: 100%;
@@ -98,5 +125,26 @@ form {
 }
 
 .img-radio {
-    width: 100px;
+    max-height: 100px;
+    max-width:100px;
+    width: auto;
+    border-radius: .3em;
+}
+
+[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+[type=radio] + img {
+    cursor: pointer;
+}
+
+[type=radio]:checked + img {
+    outline-style: double;
+    outline: 2px solid var(--Blue);
+    box-shadow: 2px solid var(--Green);
+
 }
