@@ -1,0 +1,18 @@
+{
+  "name": "practic3",
+  "version": "0.1.0",
+  "description": "Practic work 3. Forms",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "dev": "npm run watch"
+  },
+  "keywords": [],
+  "author": "Sergey Tsybrenok",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

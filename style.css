@@ -1,0 +1,52 @@
+/* https://catppuccin.com/palette/ */
+:root {
+    --Crust: #181926;
+    --Mantle: #1e2030;
+    --Base: #24273a;
+    --Surface0: #363a4f;
+    --Surface1: #494d64;
+    --Surface2: #5b6078;
+    --Overlay0: #6e738d;
+    --Overlay1: #8087a2;
+    --Overlay2: #939ab7;
+    --Subtext0: #a5adcb;
+    --Subtext1: #b8c0e0;
+    --Text: #cad3f5;
+    --Lavender: #b7bdf8;
+    --Blue: #8aadf4;
+    --Sapphire: #7dc4e4;
+    --Sky: #91d7e3;
+    --Teal: #8bd5ca;
+    --Green: #a6da95;
+    --Yellow: #eed49f;
+    --Peach: #f5a97f;
+    --Maroon: #ee99a0;
+    --Red: #ed8796;
+    --Mauve: #c6a0f6;
+    --Pink: #f5bde6;
+    --Flamingo: #f0c6c6;
+    --RoseWater: #f4dbd6;
+}
+
+* {
+    color: var(--Text);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+*::selection {
+    background-color: var(--Sapphire);
+}
+
+body {
+    background-color: var(--Base);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    -webkit-user-select: none;
+    user-select: none;
+    -moz-user-select: none;
+    cursor: pointer;
+}
