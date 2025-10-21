@@ -31,17 +31,22 @@
 * {
     color: var(--Text);
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+    /* outline: 2px solid green; */
+
+    text-align: center;
 }
 
 *::selection {
     background-color: var(--Sapphire);
+    color: #181926;
 }
 
 body {
     background-color: var(--Base);
     display: flex;
     justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
 }
 
 h1 {
@@ -49,4 +54,49 @@ h1 {
     user-select: none;
     -moz-user-select: none;
     cursor: pointer;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.container {
+    width: 80%;
+    min-width: 400px;
+    max-width: 600px;
+    background-color: var(--Crust);
+
+    border-radius: 1em;
+    padding: 20px;
+    padding-top: 0px;
+
+    margin-top: 20px;
+}
+
+.small-container {
+}
+
+
+.input-text, .input-date{
+    width: 100%;
+    height: 2em;
+    background-color: var(--Crust);
+    border: 0.1em solid var(--Blue);
+    border-radius: .5em;
+    font-size: 20px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.userAuth, .small {
+    text-align: left;
+    margin-bottom: 0px;
+    /* font-size: 1em; */
+}
+
+.img-radio {
+    width: 100px;
 }
