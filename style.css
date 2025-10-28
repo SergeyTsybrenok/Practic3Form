@@ -44,7 +44,8 @@
 
 body {
     background-color: var(--Base);
-    width: 100%;
+    margin: 0;
+    /* width: 100%; */
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -159,6 +160,8 @@ img:hover {
 [type=radio]:checked + .text-radio {
     outline: 2px solid var(--Mauve);
     box-shadow: 2px solid var(--Green);
+    border-radius: 10px;
+    /* margin: 0 100px 0 100px; */
 }
 
 
@@ -198,6 +201,19 @@ img:hover {
     cursor: pointer;
 }
 
+.catppuccin {
+    width: 80px;
+}
+
+a {
+    text-decoration: none;
+}
+
 .footer {
+    background-color: var(--Mantle);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     margin-top: 100px;
 }
