@@ -14,7 +14,7 @@
 
         <div class="container">
             <h2 class="title">
-                User auth
+                User authentication
             </h2>
 
             <div class="small-container">
@@ -35,15 +35,14 @@
 
             <div class="small-container">
                 <h3 class="title small">Your distro name</h3>
-                <input class="input-text" type="text" name="distroName" id="distroName">
+                <input placeholder="My best distro" class="input-text" type="text" name="distroName" id="distroName">
             </div>
 
             <div class="small-container grid">
-                <h3 class="title small grid-title">Main on</h3>
-                <!-- <input class="input-text" type="text" name="distroName" id="distroName"> -->
+                <h3 class="title small grid-title">Based on</h3>
 
                 <label>
-                    <input value="redhat" type="radio" name="linux" id="redhat-radio">
+                    <input value="redhat" type="radio" name="linux" id="redhat-radio" checked>
                     <img class="img-radio" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Red_Hat_logo.svg/2560px-Red_Hat_logo.svg.png" alt="red hat logo">
                     <div class="image-description">Red Hat</div>
                 </label>
@@ -94,7 +93,7 @@
                 </label>
 
                 <label class="checkbox-label">
-                    <input value="advanced" type="checkbox" id="advanced">
+                    <input value="advanced" type="checkbox" id="advanced" checked>
                     <div class="text-checkbox">Advanced</div>
                 </label>
 
@@ -111,16 +110,42 @@
 
             <div class="small-container">
                 <h3 class="title small">Philosofy</h3>
-                <input class="input-text" type="text" name="distroName" id="distroName">
+                <input spellcheck="true" placeholder="Be best then Ubuntu"
+                 class="input-text" type="text" name="philosofy" id="philosofy">
             </div>
 
             <div class="small-container">
                 <h3 class="title small">Init system</h3>
-                <input class="input-text" type="text" name="distroName" id="distroName">
+
+                <label class="radio-label">
+                    <input value="systemd" type="radio" name="init" id="systemd" checked>
+                    <div class="text-radio">Systemd</div>
+                </label>
+
+                <label class="radio-label">
+                    <input value="runit" type="radio" name="init" id="runit" >
+                    <div class="text-radio">runit</div>
+                </label>
+
+                <label class="radio-label">
+                    <input value="openrc" type="radio" name="init" id="openrc">
+                    <div class="text-radio">OpenRC</div>
+                </label>
+
+
+                <label class="radio-label">
+                    <input value="sinit" type="radio" name="init" id="sinit">
+                    <div class="text-radio">Sinit</div>
+                </label>
+
+                <label class="radio-label">
+                    <input value="s6" type="radio" name="init" id="s6">
+                    <div class="text-radio">s6</div>
+                </label>
             </div>
 
             <div class="small-container grid">
-                <h3 class="title small grid-title">Face</h3>
+                <h3 class="title small grid-title">Desktop Environment</h3>
 
                 <label class="checkbox-label">
                     <input value="xfce4" type="checkbox" id="xfce4">
@@ -133,7 +158,7 @@
                 </label>
 
                 <label class="checkbox-label">
-                    <input value="gnome" type="checkbox" id="gnome">
+                    <input value="gnome" type="checkbox" id="gnome" checked>
                     <div class="text-checkbox">GNOME</div>
                 </label>
                 
@@ -145,48 +170,61 @@
 
             <div class="small-container">
                 <h3 class="title small">Base packages</h3>
-                <input class="input-text" type="text" name="distroName" id="distroName">
+                <input spellcheck="false" placeholder="like ssh, sudo, kitty, etc."
+                 class="input-text" type="text" name="base packages" id="base packages">
             </div>
 
             <div class="small-container">
-                <h3 class="title small grid-title">LTS or rolling roll</h3>
+                <h3 class="title small grid-title">Type of update</h3>
 
                 <label class="radio-label">
-                    <input value="runit" type="radio" name="init" id="runit">
-                    <div class="text-radio">runit</div>
+                    <input value="lts" type="radio" name="lts rolling" id="lts" checked>
+                    <div class="text-radio">LTS</div>
                 </label>
 
                 <label class="radio-label">
-                    <input value="openrc" type="radio" name="init" id="openrc">
-                    <div class="text-radio">OpenRC</div>
-                </label>
-
-                <label class="radio-label">
-                    <input value="systemmd" type="radio" name="init" id="systemmd">
-                    <div class="text-radio">Systemmd</div>
-                </label>
-
-                <label class="radio-label">
-                    <input type="radio" name="init" id="sinit">
-                    <div class="text-radio">Sinit</div>
+                    <input value="rolling release" type="radio" name="lts rolling" id="rolling" >
+                    <div class="text-radio">Rolling release</div>
                 </label>
             </div>
 
             <div class="small-container">
-                <h3 class="title small">Hardware</h3>
-                <input class="input-text" type="text" name="distroName" id="distroName">
+                <h3 class="title small">License (be carefull, must be copy with distro on)</h3>
+                <input class="input-text" type="text" name="uicense" id="license">
             </div>
 
             <div class="small-container">
-                <h3 class="title small">Ecosystem</h3>
-                <input class="input-text" type="text" name="distroName" id="distroName">
+                <h3 class="title small">Package manager</h3>
+
+                <label class="radio-label">
+                    <input value="pacman" type="radio" name="manager" id="pacman" checked>
+                    <div class="text-radio">pacman</div>
+                </label>
+
+                <label class="radio-label">
+                    <input value="nix" type="radio" name="manager" id="nix">
+                    <div class="text-radio">nix</div>
+                </label>
+
+                <label class="radio-label">
+                    <input value="dnf" type="radio" name="manager" id="dnf">
+                    <div class="text-radio">dnf</div>
+                </label>
+
+                <label class="radio-label">
+                    <input value="apt" type="radio" name="manager" id="apt">
+                    <div class="text-radio">apt</div>
+                </label>
             </div>
+
+            <button type="submit" class="submit">Send</button>
 
         </div>
-
-
-
     </form>
+
+    <div class="footer">
+        Made by Rose
+    </div>
 
     <script>var exports = {};</script>
     <script src="dist/script.js"></script>
