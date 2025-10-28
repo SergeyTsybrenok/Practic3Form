@@ -31,6 +31,11 @@ enum PakageManager {
 //#endregion
 
 //#region COSNTANTS
+
+const desktopEnvirenment = ["xfce4", "hyprland", "gnome", "dwm"]
+
+const auditory = ["beginners", "advanced", "professionals", "gods"]
+
 const mainForm = document.getElementById('mainForm') as HTMLFormElement;
 
 const submitButton = document.getElementById('submitButton') as HTMLButtonElement;
@@ -89,8 +94,42 @@ class UserData {
     };
 };
 
+class CheckboxSelector {
+    idCheckbox: string[] = [];
+    #checkbox: HTMLInputElement[] = [];
+
+    constructor(id: string[]) {
+        this.idCheckbox = id;
+    }
+
+    Initialize() {
+        this.idCheckbox.forEach(currentId => {
+            const currentCheckbox = document.getElementById(currentId);
+
+            this.#checkbox.push(currentCheckbox as HTMLInputElement);
+        });
+    }
+
+    GetAllCheckedCheckboxes(): string {
+        let checkedList: string;
+
+        //todo
+
+        return ""
+    }
+}
+
 function AddError (newError: string) {
     errorText.textContent += `\n ${newError}` 
+}
+
+function HaveError () {
+    if (errorText.textContent != "") {
+        return true
+    }
+    else{
+        return false
+    }
 }
 
 // TODO mv to initialize all init inputs
@@ -109,12 +148,35 @@ function ClearErrorText () {
     errorText.textContent = "";
 }
 
+function SendForm (form: HTMLFormElement) {
+    const newUser: UserData = new UserData(
+        form.userName.value,
+        form.distroName.value,
+        form.linux.value as BasedOn,
+        form.auditory.value,
+        form.philosofy.value,
+        form.initSystem as InitSystem,
+        form.basePackage,
+        form.typeOfUpdate as TypeOfUpdate,
+        form.license,
+        form.packageManager as PakageManager);
+}
+
 function TrySend () {
     ClearErrorText();
 
     CheckInputNotNull(inputs);
 
+    if (!HaveError()) {
+        // SendForm(mainForm);
+    }
+
     AddError(mainForm.userName.value);
+    AddError(mainForm.distroName.value);
+    AddError(mainForm.linux.value);
+    AddError(mainForm.init.value);
+    AddError(mainForm.lts_rolling.value);
+    AddError(mainForm.manager.value);
 }
 
 submitButton.addEventListener('click', function (e) {

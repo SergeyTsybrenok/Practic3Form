@@ -201,8 +201,20 @@ img:hover {
     cursor: pointer;
 }
 
+.error-text {
+    color: var(--Maroon);
+    font-weight: bold;
+}
+
 .catppuccin {
     width: 80px;
+    margin: 10px;
+}
+
+.footer-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 a {
