@@ -36,6 +36,8 @@ const desktopEnvirenment = ["xfce4", "hyprland", "gnome", "dwm"]
 
 const auditory = ["beginners", "advanced", "professionals", "gods"]
 
+const auditoryCheckbox = new CheckboxSelector(auditory);
+
 const mainForm = document.getElementById('mainForm') as HTMLFormElement;
 
 const submitButton = document.getElementById('submitButton') as HTMLButtonElement;
@@ -53,6 +55,7 @@ class UserData {
     auditory: string;
     philosofy: string;
     initSystem: InitSystem;
+    desktopEnvironment: string;
     basePackages: string;
     typeOfUpdate: TypeOfUpdate;
     license: string;
@@ -66,6 +69,7 @@ class UserData {
         auditory: string,
         philosofy: string,
         initSystem: InitSystem,
+        desktopEnvironment: string,
         basePackages: string,
         typeOfUpdate: TypeOfUpdate,
         license: string,
@@ -75,8 +79,9 @@ class UserData {
         this.distroName = distroName;
         this.basedOn = basedOn;
         this.auditory = auditory;
-        this.initSystem = initSystem;
         this.philosofy = philosofy;
+        this.initSystem = initSystem;
+        this.desktopEnvironment = desktopEnvironment;
         this.basePackages = basePackages;
         this.typeOfUpdate = typeOfUpdate;
         this.license = license;
@@ -96,7 +101,7 @@ class UserData {
 
 class CheckboxSelector {
     idCheckbox: string[] = [];
-    #checkbox: HTMLInputElement[] = [];
+    #checkboxs: HTMLInputElement[] = [];
 
     constructor(id: string[]) {
         this.idCheckbox = id;
@@ -106,18 +111,32 @@ class CheckboxSelector {
         this.idCheckbox.forEach(currentId => {
             const currentCheckbox = document.getElementById(currentId);
 
-            this.#checkbox.push(currentCheckbox as HTMLInputElement);
+            this.#checkboxs.push(currentCheckbox as HTMLInputElement);
         });
     }
 
     GetAllCheckedCheckboxes(): string {
-        let checkedList: string;
+        let checkedList: string = "";
 
-        //todo
+        this.#checkboxs.forEach(checkbox => {
+            const checkbox = document.getElementById(checkbox) as HTMLInputElement;
+            if (checkbox.checked) {
+                checkedList += `${checkbox}, `
+            }
+        });
 
-        return ""
+        return checkedList;
     }
 }
+
+document.addEventListener('DOMContentLoaded', function (e) {
+    auditoryCheckbox.Initialize();
+    desktop //todo
+    
+});
+// function methodName (arguments) {
+//     // body
+// };j
 
 function AddError (newError: string) {
     errorText.textContent += `\n ${newError}` 
@@ -153,7 +172,7 @@ function SendForm (form: HTMLFormElement) {
         form.userName.value,
         form.distroName.value,
         form.linux.value as BasedOn,
-        form.auditory.value,
+        form.au, //todo
         form.philosofy.value,
         form.initSystem as InitSystem,
         form.basePackage,
