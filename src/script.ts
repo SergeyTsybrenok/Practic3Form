@@ -95,6 +95,9 @@ class CheckboxSelector {
     Initialize() {
         this.idCheckbox.forEach(currentId => {
             const currentCheckbox = document.getElementById(currentId);
+            if (currentCheckbox === null) {
+                console.error(`${currentId} can't be found`);
+            }
 
             this.#checkboxs.push(currentCheckbox as HTMLInputElement);
         });
@@ -164,19 +167,21 @@ function ClearErrorText () {
     errorText.textContent = "";
 }
 
-function SendForm (form: HTMLFormElement) {
+function SendForm (form: HTMLFormElement): UserData {
     const newUser: UserData = new UserData(
-        form.userName.value,
-        form.distroName.value,
+        form.userName.value as string,
+        form.distroName.value as string,
         form.linux.value as BasedOn,
         auditoryCheckbox.GetAllCheckedCheckboxes(),
-        form.philosofy.value,
-        form.initSystem as InitSystem,
+        form.philosofy.value as string,
+        form.init.value as InitSystem,
         desktopEnvirenmentCheckbox.GetAllCheckedCheckboxes(),
-        form.basePackage,
-        form.typeOfUpdate as TypeOfUpdate,
-        form.license,
+        form.basepackages.value as string,
+        form.lts_rolling.value as TypeOfUpdate,
+        form.license.value as string,
         form.packageManager as PakageManager);
+
+        return newUser;
 }
 
 function TrySend () {
@@ -185,20 +190,14 @@ function TrySend () {
     CheckInputNotNull(inputs);
 
     if (!HaveError()) {
-        // SendForm(mainForm);
+        const user: UserData = SendForm(mainForm);
+        AddError(user.userName);
+        AddError(user.distroName);
+        AddError(user.auditory);
+        AddError(user.basedOn.toString());
+        AddError(user.initSystem.toString());
     }
 
-    AddError(mainForm.userName.value);
-    AddError(mainForm.distroName.value);
-    AddError(mainForm.linux.value);
-    AddError(auditoryCheckbox.GetAllCheckedCheckboxes())
-    AddError(mainForm.philosofy.value);//
-    AddError(mainForm.init.value);
-    AddError(desktopEnvirenmentCheckbox.GetAllCheckedCheckboxes())
-    AddError(mainForm.basepackages.value);
-    AddError(mainForm.lts_rolling.value);
-    AddError(mainForm.license.value);
-    AddError(mainForm.manager.value);
 }
 
 submitButton.addEventListener('click', function (e) {
