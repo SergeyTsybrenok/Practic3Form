@@ -204,6 +204,7 @@ img:hover {
 .error-text {
     color: var(--Maroon);
     font-weight: bold;
+    white-space: pre-wrap;
 }
 
 .catppuccin {

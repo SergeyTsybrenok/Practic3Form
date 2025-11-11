@@ -30,22 +30,7 @@ enum PakageManager {
 }
 //#endregion
 
-//#region COSNTANTS
-
-const desktopEnvirenment = ["xfce4", "hyprland", "gnome", "dwm"]
-
-const auditory = ["beginners", "advanced", "professionals", "gods"]
-
-const auditoryCheckbox = new CheckboxSelector(auditory);
-
-const mainForm = document.getElementById('mainForm') as HTMLFormElement;
-
-const submitButton = document.getElementById('submitButton') as HTMLButtonElement;
-const errorText = document.getElementById('errorText') as HTMLElement;
-
-const inputs: string[] = ["userName", "distroName", "philosofy", "base packages", "license"];
-//#endregion
-
+//#region CLASS
 class UserData {
     userName: string;
     dateBirth: Date = new Date();
@@ -119,24 +104,36 @@ class CheckboxSelector {
         let checkedList: string = "";
 
         this.#checkboxs.forEach(checkbox => {
-            const checkbox = document.getElementById(checkbox) as HTMLInputElement;
             if (checkbox.checked) {
-                checkedList += `${checkbox}, `
+                checkedList += `${checkbox.id}, `
             }
         });
 
         return checkedList;
     }
 }
+//#endregion
+
+//#region COSNTANTS
+
+const desktopEnvirenment = ["xfce4", "hyprland", "gnome", "dwm"]
+const auditory = ["beginners", "advanced", "professionals", "gods"]
+
+const desktopEnvirenmentCheckbox = new CheckboxSelector(desktopEnvirenment);
+const auditoryCheckbox = new CheckboxSelector(auditory);
+
+const mainForm = document.getElementById('mainForm') as HTMLFormElement;
+
+const submitButton = document.getElementById('submitButton') as HTMLButtonElement;
+const errorText = document.getElementById('errorText') as HTMLElement;
+
+const inputs: string[] = ["userName", "distroName", "philosofy", "basepackages", "license"];
+//#endregion
 
 document.addEventListener('DOMContentLoaded', function (e) {
+    desktopEnvirenmentCheckbox.Initialize();
     auditoryCheckbox.Initialize();
-    desktop //todo
-    
 });
-// function methodName (arguments) {
-//     // body
-// };j
 
 function AddError (newError: string) {
     errorText.textContent += `\n ${newError}` 
@@ -172,9 +169,10 @@ function SendForm (form: HTMLFormElement) {
         form.userName.value,
         form.distroName.value,
         form.linux.value as BasedOn,
-        form.au, //todo
+        auditoryCheckbox.GetAllCheckedCheckboxes(),
         form.philosofy.value,
         form.initSystem as InitSystem,
+        desktopEnvirenmentCheckbox.GetAllCheckedCheckboxes(),
         form.basePackage,
         form.typeOfUpdate as TypeOfUpdate,
         form.license,
@@ -193,8 +191,13 @@ function TrySend () {
     AddError(mainForm.userName.value);
     AddError(mainForm.distroName.value);
     AddError(mainForm.linux.value);
+    AddError(auditoryCheckbox.GetAllCheckedCheckboxes())
+    AddError(mainForm.philosofy.value);//
     AddError(mainForm.init.value);
+    AddError(desktopEnvirenmentCheckbox.GetAllCheckedCheckboxes())
+    AddError(mainForm.basepackages.value);
     AddError(mainForm.lts_rolling.value);
+    AddError(mainForm.license.value);
     AddError(mainForm.manager.value);
 }
 
