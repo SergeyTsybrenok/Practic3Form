@@ -127,6 +127,10 @@ class BrowserLocal {
         }
         return BrowserLocal.instance;
     }
+
+    public Initializate(): void {
+       this.GetUserDataFromLocalStorage();
+    }
     
     public SaveUserData(userDataToSave:UserData, rewriteData:boolean = false): void {
         if (rewriteData) {
@@ -154,8 +158,13 @@ class BrowserLocal {
     }
     
 
-    private SaveUserDataToLocalStorage(): void{
+    private SaveUserDataToLocalStorage(): void {
         localStorage.setItem("data", JSON.stringify(this.allData))
+    }
+
+    private GetUserDataFromLocalStorage(): void {
+        const data = JSON.parse(localStorage.getItem("data") || "[]");
+        this.allData = Array.isArray(data) ? data as UserData[] : [];
     }
 }
 
@@ -175,11 +184,14 @@ const submitButton = document.getElementById('submitButton') as HTMLButtonElemen
 const errorText = document.getElementById('errorText') as HTMLElement;
 
 const inputs: string[] = ["userName", "distroName", "philosofy", "basepackages", "license"];
+
+const browserLocal: BrowserLocal = BrowserLocal.getInstance();
 //#endregion
 
 document.addEventListener('DOMContentLoaded', function (e) {
     desktopEnvirenmentCheckbox.Initialize();
     auditoryCheckbox.Initialize();
+    browserLocal.Initializate();
 });
 
 function AddError (newError: string) {
