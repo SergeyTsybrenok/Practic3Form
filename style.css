@@ -201,12 +201,46 @@ img:hover {
     cursor: pointer;
 }
 
-.error-text {
-    color: var(--Maroon);
+.notify-text {
     font-weight: bold;
     white-space: pre-wrap;
 }
 
+.error{
+    color: var(--Maroon);
+}
+
+.notify{
+    color: var(--Subtext0);
+}
+
+.good-notify{
+    color: var(--Green);
+}
+
+.catppuccin {
+    width: 80px;
+    margin: 10px;
+}
+
+.footer-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.footer {
+    background-color: var(--Mantle);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 100px;
+}
 .catppuccin {
     width: 80px;
     margin: 10px;

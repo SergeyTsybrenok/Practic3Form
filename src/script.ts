@@ -182,6 +182,7 @@ const mainForm = document.getElementById('mainForm') as HTMLFormElement;
 
 const submitButton = document.getElementById('submitButton') as HTMLButtonElement;
 const errorText = document.getElementById('errorText') as HTMLElement;
+const notifyText = document.getElementById('notifyText') as HTMLElement;
 
 const inputs: string[] = ["userName", "distroName", "philosofy", "basepackages", "license"];
 
@@ -194,11 +195,19 @@ document.addEventListener('DOMContentLoaded', function (e) {
     browserLocal.Initializate();
 });
 
-function AddError (newError: string) {
+function AddNotification (newNotification: string): void { //TODO move to class
+    notifyText.textContent += `\n ${newNotification}`;
+}
+
+function ClearNotification (): void {
+    notifyText.textContent = "";
+}
+
+function AddError (newError: string): void { //TODO move to class
     errorText.textContent += `\n ${newError}` 
 }
 
-function HaveError () {
+function HaveError (): boolean {
     if (errorText.textContent != "") {
         return true
     }
@@ -223,7 +232,7 @@ function ClearErrorText () {
     errorText.textContent = "";
 }
 
-function SendForm (form: HTMLFormElement): UserData {
+function GetUserDataFromForm (form: HTMLFormElement): UserData {
     const newUser: UserData = new UserData(
         form.userName.value as string,
         form.distroName.value as string,
@@ -246,7 +255,9 @@ function TrySend () {
     CheckInputNotNull(inputs);
 
     if (!HaveError()) {
-        const user: UserData = SendForm(mainForm);
+        const userData: UserData = GetUserDataFromForm(mainForm);
+        browserLocal.SaveUserData(userData);
+        AddNotification(`${userData.userName} data saved!`)
     }
 
 }
