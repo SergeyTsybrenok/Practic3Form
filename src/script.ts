@@ -115,6 +115,30 @@ class CheckboxSelector {
         return checkedList;
     }
 }
+
+class BrowserLocal {
+    private static instance: BrowserLocal;
+    private allData: UserData[] = [];
+
+    //save /load user data to localStorage
+    public static getInstance(): BrowserLocal {
+        if (!BrowserLocal.instance) {
+            BrowserLocal.instance = new BrowserLocal();
+        }
+        return BrowserLocal.instance;
+    }
+    
+    public SaveUserData(userDataToSave:UserData, rewriteData:boolean = false): void {
+        
+    }
+
+    public GetAllUserData(): UserData[]
+
+    private SaveUserDataToLocalStorage(userDataToSave:UserData){
+        localStorage.setItem("data", JSON.stringify(this.allData))
+    }
+}
+
 //#endregion
 
 //#region COSNTANTS
@@ -191,11 +215,6 @@ function TrySend () {
 
     if (!HaveError()) {
         const user: UserData = SendForm(mainForm);
-        AddError(user.userName);
-        AddError(user.distroName);
-        AddError(user.auditory);
-        AddError(user.basedOn.toString());
-        AddError(user.initSystem.toString());
     }
 
 }
