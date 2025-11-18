@@ -129,12 +129,32 @@ class BrowserLocal {
     }
     
     public SaveUserData(userDataToSave:UserData, rewriteData:boolean = false): void {
+        if (rewriteData) {
+            for (let index = 0; index < this.allData.length; index++) {
+                const currentUserData = this.allData[index];
+                if (currentUserData?.userName === userDataToSave.userName) {
+                    this.allData[index] = userDataToSave;
+                }
+            }
+        }
+        else {
+            this.allData.push(userDataToSave);
+        }
         
+        this.SaveUserDataToLocalStorage();
     }
 
-    public GetAllUserData(): UserData[]
+    public GetAllUserData(): UserData[] {
+        return this.allData;
+    }
 
-    private SaveUserDataToLocalStorage(userDataToSave:UserData){
+    public ClearAllData(): void {
+        this.allData = [];
+        this.SaveUserDataToLocalStorage();
+    }
+    
+
+    private SaveUserDataToLocalStorage(): void{
         localStorage.setItem("data", JSON.stringify(this.allData))
     }
 }
