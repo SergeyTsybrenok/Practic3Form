@@ -262,7 +262,7 @@ function TrySend () {
 
 }
 
-submitButton.addEventListener('click', function (e) {
+submitButton?.addEventListener('click', function (e) { //todo:w
     e.preventDefault();
     TrySend();
 });

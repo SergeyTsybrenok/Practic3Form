@@ -188,17 +188,37 @@ img:hover {
     margin-top: 2px;
 }
 
-.submit {
-    margin-top: 30px;
-    background-color: var(--Green);
+
+.button {
+    background-color: var(--RoseWater);
     color: var(--Crust);
-    width: 60%;
+    width: 250px;
     height: 40px;
     border: none;
     border-radius: 10px;
 
     font-size: 1.3em;
     cursor: pointer;
+    
+    transition: all;
+    transition-duration: 100ms;
+}
+
+.button:hover {
+    background-color: var(--Lavender);
+    transition: all;
+    transition-duration: 100ms;
+}
+
+.submit-button {
+    margin-top: 30px;
+    background-color: var(--Green);
+    color: var(--Crust);
+    width: 60%;
+}
+
+.submit-button:hover {
+    background-color: var(--Teal);
 }
 
 .notify-text {
@@ -227,10 +247,6 @@ img:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-a {
-    text-decoration: none;
 }
 
 .footer {
