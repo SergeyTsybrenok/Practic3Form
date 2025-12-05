@@ -1,5 +1,5 @@
 {
-  "name": "practic3",
+  "name": "Practic3Form",
   "version": "0.1.0",
   "description": "Practic work 3. Forms",
   "main": "index.js",
@@ -11,8 +11,11 @@
   "keywords": [],
   "author": "Sergey Tsybrenok",
   "license": "ISC",
-  "type": "commonjs",
+  "packageManager": "pnpm@10.15.1",
+  "type": "module",
   "devDependencies": {
+    "@types/node": "^24.10.1",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
 }
