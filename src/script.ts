@@ -180,7 +180,7 @@ const auditoryCheckbox = new CheckboxSelector(auditory);
 
 const mainForm = document.getElementById('mainForm') as HTMLFormElement;
 
-const submitButton = document.getElementById('submitButton') as HTMLButtonElement;
+const submitButton = document.getElementById('submitButton') as HTMLButtonElement | null;
 const errorText = document.getElementById('errorText') as HTMLElement;
 const notifyText = document.getElementById('notifyText') as HTMLElement;
 
@@ -190,9 +190,13 @@ const browserLocal: BrowserLocal = BrowserLocal.getInstance();
 //#endregion
 
 document.addEventListener('DOMContentLoaded', function (e) {
-    desktopEnvirenmentCheckbox.Initialize();
-    auditoryCheckbox.Initialize();
-    browserLocal.Initializate();
+    if (document.title === "index.html") {
+        console.log("if work");
+        desktopEnvirenmentCheckbox.Initialize();
+        auditoryCheckbox.Initialize();
+        browserLocal.Initializate();
+    }
+    console.log("Not if");
 });
 
 function AddNotification (newNotification: string): void { //TODO move to class
@@ -262,7 +266,7 @@ function TrySend () {
 
 }
 
-submitButton?.addEventListener('click', function (e) { //todo:w
+submitButton?.addEventListener('click', function (e) { 
     e.preventDefault();
     TrySend();
 });
