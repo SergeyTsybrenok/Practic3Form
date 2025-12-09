@@ -190,13 +190,15 @@ const browserLocal: BrowserLocal = BrowserLocal.getInstance();
 //#endregion
 
 document.addEventListener('DOMContentLoaded', function (e) {
-    if (document.title === "index.html") {
-        console.log("if work");
+    if (document.title === "Linux forms") {
+        // console.log("if work");
         desktopEnvirenmentCheckbox.Initialize();
         auditoryCheckbox.Initialize();
         browserLocal.Initializate();
     }
-    console.log("Not if");
+    else if (document.title == "Admin Panel") {
+        // console.log("Admin");
+    }
 });
 
 function AddNotification (newNotification: string): void { //TODO move to class
