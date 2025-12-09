@@ -1,12 +1,12 @@
 {
-  "name": "Practic3Form",
-  "version": "0.1.0",
+  "name": "practic-3-forms",
+  "version": "0.2.0",
   "description": "Practic work 3. Forms",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "dev": "npm run watch"
+    "dev": "pnpm run watch"
   },
   "keywords": [],
   "author": "Sergey Tsybrenok",
