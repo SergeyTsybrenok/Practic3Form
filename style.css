@@ -80,6 +80,23 @@ form {
     margin: 20px auto 0 auto;
 }
 
+.container-wider {
+    /* width: 100%; */
+    min-width: 400px;
+    max-width: 100%;
+    /* max-width: 600px; */
+    /* background-color: var(--Green); */
+    background-color: var(--Crust);
+    border-radius: 1em;
+    padding: 20px;
+    padding-top: 0px;
+    margin: 20px auto 0 auto;
+}
+
+/* .wider {
+
+}
+ */
 .small-container {
     /* background-color: var(--Mantle); */
     margin: 4px;
@@ -281,4 +298,31 @@ a {
     justify-content: space-around;
     align-items: center;
     margin-top: 100px;
+}
+
+
+/* admin panel */
+
+.data-row {
+    /* width: 100px; */
+    min-width: 50px;
+    max-width: 50px;
+    padding: 10px;
+    text-wrap-mode: nowrap;
+    border: 0.1em solid var(--Blue);
+}
+
+.date-birth {
+    min-width: 80px;
+    max-width: 80px;
+}
+
+.user-name {
+    min-width: 120px;
+    max-width: 120px;
+}
+.table-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
 }
