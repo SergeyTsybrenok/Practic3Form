@@ -1,174 +1,9 @@
-//#region ENUMS
-enum BasedOn {
-    RedHat,
-    Arch,
-    Gentoo,
-    Debian,
-    Ubuntu,
-    LFS,
-    Slackware
-}
+import * as BrowserTools from "./BrowserTools.js";
+import CheckboxSelector from "./CheckboxSelector.js";
 
-enum InitSystem {
-    Systemd,
-    runit,
-    OpenRC,
-    Sinit,
-    s6
-}
+type BrowserLocalInstance = InstanceType<typeof BrowserTools.BrowserLocal>;
+type UserDataInstance = InstanceType<typeof BrowserTools.UserData>;
 
-enum TypeOfUpdate {
-    LTS,
-    RollingRelese
-}
-
-enum PakageManager {
-    pacman,
-    nix,
-    dnf,
-    apt
-}
-//#endregion
-
-//#region CLASS
-class UserData {
-    userName: string;
-    dateBirth: Date = new Date();
-
-    distroName: string;
-    basedOn: BasedOn;
-    auditory: string;
-    philosofy: string;
-    initSystem: InitSystem;
-    desktopEnvironment: string;
-    basePackages: string;
-    typeOfUpdate: TypeOfUpdate;
-    license: string;
-    packageManager: PakageManager;
-
-
-    constructor(
-        userName: string,
-        distroName: string,
-        basedOn: BasedOn,
-        auditory: string,
-        philosofy: string,
-        initSystem: InitSystem,
-        desktopEnvironment: string,
-        basePackages: string,
-        typeOfUpdate: TypeOfUpdate,
-        license: string,
-        packageManager: PakageManager)
-        {
-        this.userName = userName;
-        this.distroName = distroName;
-        this.basedOn = basedOn;
-        this.auditory = auditory;
-        this.philosofy = philosofy;
-        this.initSystem = initSystem;
-        this.desktopEnvironment = desktopEnvironment;
-        this.basePackages = basePackages;
-        this.typeOfUpdate = typeOfUpdate;
-        this.license = license;
-        this.packageManager = packageManager;
-    };
-
-    TrySetDatebirth(newDate: Date) {
-        if (newDate.getTime() >= Date.now()) {
-            return false
-        }
-        else {
-            this.dateBirth = newDate;
-            return true
-        }
-    };
-};
-
-class CheckboxSelector {
-    idCheckbox: string[] = [];
-    #checkboxs: HTMLInputElement[] = [];
-
-    constructor(id: string[]) {
-        this.idCheckbox = id;
-    }
-
-    Initialize() {
-        this.idCheckbox.forEach(currentId => {
-            const currentCheckbox = document.getElementById(currentId);
-            if (currentCheckbox === null) {
-                console.error(`${currentId} can't be found`);
-            }
-
-            this.#checkboxs.push(currentCheckbox as HTMLInputElement);
-        });
-    }
-
-    GetAllCheckedCheckboxes(): string {
-        let checkedList: string = "";
-
-        this.#checkboxs.forEach(checkbox => {
-            if (checkbox.checked) {
-                checkedList += `${checkbox.id}, `
-            }
-        });
-
-        return checkedList;
-    }
-}
-
-class BrowserLocal {
-    private static instance: BrowserLocal;
-    private allData: UserData[] = [];
-
-    //save /load user data to localStorage
-    public static getInstance(): BrowserLocal {
-        if (!BrowserLocal.instance) {
-            BrowserLocal.instance = new BrowserLocal();
-        }
-        return BrowserLocal.instance;
-    }
-
-    public Initializate(): void {
-       this.GetUserDataFromLocalStorage();
-    }
-    
-    public SaveUserData(userDataToSave:UserData, rewriteData:boolean = false): void {
-        if (rewriteData) {
-            for (let index = 0; index < this.allData.length; index++) {
-                const currentUserData = this.allData[index];
-                if (currentUserData?.userName === userDataToSave.userName) {
-                    this.allData[index] = userDataToSave;
-                }
-            }
-        }
-        else {
-            this.allData.push(userDataToSave);
-        }
-        
-        this.SaveUserDataToLocalStorage();
-    }
-
-    public GetAllUserData(): UserData[] {
-        return this.allData;
-    }
-
-    public ClearAllData(): void {
-        this.allData = [];
-        this.SaveUserDataToLocalStorage();
-    }
-    
-
-    private SaveUserDataToLocalStorage(): void {
-        localStorage.setItem("data", JSON.stringify(this.allData))
-    }
-
-    private GetUserDataFromLocalStorage(): void {
-        const data = JSON.parse(localStorage.getItem("data") || "[]");
-        this.allData = Array.isArray(data) ? data as UserData[] : [];
-    }
-}
-
-//#endregion
 
 //#region COSNTANTS
 
@@ -180,25 +15,19 @@ const auditoryCheckbox = new CheckboxSelector(auditory);
 
 const mainForm = document.getElementById('mainForm') as HTMLFormElement;
 
-const submitButton = document.getElementById('submitButton') as HTMLButtonElement | null;
+const submitButton = document.getElementById('submitButton') as HTMLButtonElement;
 const errorText = document.getElementById('errorText') as HTMLElement;
 const notifyText = document.getElementById('notifyText') as HTMLElement;
 
 const inputs: string[] = ["userName", "distroName", "philosofy", "basepackages", "license"];
 
-const browserLocal: BrowserLocal = BrowserLocal.getInstance();
+const browserLocal: BrowserLocalInstance = BrowserTools.BrowserLocal.getInstance();
 //#endregion
 
 document.addEventListener('DOMContentLoaded', function (e) {
-    if (document.title === "Linux forms") {
-        // console.log("if work");
         desktopEnvirenmentCheckbox.Initialize();
         auditoryCheckbox.Initialize();
         browserLocal.Initializate();
-    }
-    else if (document.title == "Admin Panel") {
-        // console.log("Admin");
-    }
 });
 
 function AddNotification (newNotification: string): void { //TODO move to class
@@ -238,19 +67,19 @@ function ClearErrorText () {
     errorText.textContent = "";
 }
 
-function GetUserDataFromForm (form: HTMLFormElement): UserData {
-    const newUser: UserData = new UserData(
+function GetUserDataFromForm (form: HTMLFormElement): UserDataInstance {
+    const newUser: UserDataInstance = new BrowserTools.UserData(
         form.userName.value as string,
         form.distroName.value as string,
-        form.linux.value as BasedOn,
+        form.linux.value as BrowserTools.BasedOn,
         auditoryCheckbox.GetAllCheckedCheckboxes(),
         form.philosofy.value as string,
-        form.init.value as InitSystem,
+        form.init.value as BrowserTools.InitSystem,
         desktopEnvirenmentCheckbox.GetAllCheckedCheckboxes(),
         form.basepackages.value as string,
-        form.lts_rolling.value as TypeOfUpdate,
+        form.lts_rolling.value as BrowserTools.TypeOfUpdate,
         form.license.value as string,
-        form.packageManager as PakageManager);
+        form.packageManager as BrowserTools.PakageManager);
 
         return newUser;
 }
@@ -261,7 +90,7 @@ function TrySend () {
     CheckInputNotNull(inputs);
 
     if (!HaveError()) {
-        const userData: UserData = GetUserDataFromForm(mainForm);
+        const userData: BrowserTools.UserData = GetUserDataFromForm(mainForm);
         browserLocal.SaveUserData(userData);
         AddNotification(`${userData.userName} data saved!`)
     }
