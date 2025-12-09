@@ -93,6 +93,8 @@ function TrySend () {
         const userData: BrowserTools.UserData = GetUserDataFromForm(mainForm);
         browserLocal.SaveUserData(userData);
         AddNotification(`${userData.userName} data saved!`)
+        console.log(userData.userName);
+        console.log(browserLocal.GetAllUserData()[0]?.userName);
     }
 
 }
