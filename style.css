@@ -196,6 +196,8 @@ img:hover {
     height: 40px;
     border: none;
     border-radius: 10px;
+    margin: 5px;
+    margin-top: 20px;
 
     font-size: 1.3em;
     cursor: pointer;
