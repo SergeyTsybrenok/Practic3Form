@@ -1,8 +1,8 @@
 import * as BrowserTools from "./BrowserTools.js";
 import CheckboxSelector from "./CheckboxSelector.js";
 
-type BrowserLocalInstance = InstanceType<typeof BrowserTools.BrowserLocal>;
-type UserDataInstance = InstanceType<typeof BrowserTools.UserData>;
+type BrowserLocalInstance = InstanceType<typeof BrowserTools.BrowserLocal>; //remove
+type UserDataInstance = InstanceType<typeof BrowserTools.UserData>; //remove
 
 
 //#region COSNTANTS

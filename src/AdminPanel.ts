@@ -45,56 +45,54 @@ function ClearUserDataTable(): void {
 //     });
 // }
 
+const setTextContent = (element: Element | null | undefined, text: string) => {
+    if (element instanceof HTMLElement && text != undefined) {
+        element.textContent = text;
+    }
+};
+
+
 function CreateElements(): void {
     const userData: BrowserTools.UserData[] = browserLocal.GetAllUserData();
-    let prettyStrings: string[] = [];
+
+    const rows: HTMLElement[] = new Array<HTMLElement>();
 
     userData.forEach(data => {
         const newRow = document.createElement("div");
 
-        
+        const elements: HTMLElement[] = new Array<HTMLElement>(12);
 
-        const nameElement = document.createElement("div");
-        const dataElement = document.createElement("div");
-        const distroElement = document.createElement("div");
-        const basedElement = document.createElement("div");
-        const auditoryElement = document.createElement("div");
-        const philosofyElement = document.createElement("div");
-        const initSystemElement = document.createElement("div");
-        const desktopElement = document.createElement("div");
-        const basePackagesElement = document.createElement("div");
-        const updateTypeElement = document.createElement("div");
-        const licenseElement = document.createElement("div");
-        const packageManagerElement = document.createElement("div");
+        for (let index = 0; index < elements.length; index++) {
+            const newElement = document.createElement("div");
+            newElement.classList.add("data-row");
 
+            elements[index] = newElement
+        }
+
+        setTextContent(elements[0], data.userName)
+        setTextContent(elements[1], data.dateBirth.toString())
+        setTextContent(elements[2], data.distroName)
+        setTextContent(elements[3], data.basePackages)
+        setTextContent(elements[4], data.auditory)
+        setTextContent(elements[5], data.philosofy)
+        setTextContent(elements[6], data.initSystem.toString())
+        setTextContent(elements[7], data.desktopEnvironment)
+        setTextContent(elements[8], data.basePackages)
+        setTextContent(elements[9], data.typeOfUpdate.toString())
+        setTextContent(elements[10], data.license)
+        setTextContent(elements[11], "")
+
+        elements.forEach(element => {
+            console.log(element.classList.item(0));
+            newRow.appendChild(element);
+        });
         newRow.classList.add("table-row");
-        nameElement.classList.add("data-row");
-        dataElement.classList.add("data-row");
-        distroElement.classList.add("data-row");
-        basedElement.classList.add("data-row");
-        auditoryElement.classList.add("data-row");
-        philosofyElement.classList.add("data-row");
-        initSystemElement.classList.add("data-row");
-        desktopElement.classList.add("data-row");
-        basePackagesElement.classList.add("data-row");
-        updateTypeElement.classList.add("data-row");
-        licenseElement.classList.add("data-row");
-        packageManagerElement.classList.add("data-row");
 
-        nameElement.textContent = data.userName;
-
-        newRow.appendChild(nameElement);
         userdataText.appendChild(newRow);
-        userdataText.appendChild(dataElement);
-        userdataText.appendChild(dist);
-        userdataText.appendChild(newRow);
-        userdataText.appendChild(newRow);
-        userdataText.appendChild(newRow);
-        userdataText.appendChild(newRow);
-        userdataText.appendChild(newRow);
-        userdataText.appendChild(newRow);
-        userdataText.appendChild(newRow);
-        userdataText.appendChild(newRow);
-
     });
+
+    // rows.forEach(element => {
+    //     userdataText.appendChild(element);
+    // });
+
 }

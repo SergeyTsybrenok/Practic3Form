@@ -305,8 +305,8 @@ a {
 
 .data-row {
     /* width: 100px; */
-    min-width: 50px;
-    max-width: 50px;
+    /* min-width: 50px; */
+    /* max-width: 50px; */
     padding: 10px;
     text-wrap-mode: nowrap;
     border: 0.1em solid var(--Blue);
