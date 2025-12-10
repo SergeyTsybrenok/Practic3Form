@@ -60,6 +60,7 @@ function CreateElements(): void {
 
     const rows: HTMLElement[] = new Array<HTMLElement>();
 
+    let index: number = 0; //TODO use for except foreach
     userData.forEach(data => {
         const newRow = document.createElement("div");
 
@@ -102,7 +103,10 @@ function CreateElements(): void {
         userdataText.appendChild(newRow);
         deleteRowButton.addEventListener('click', function (e) {
             userdataText.removeChild(newRow);
+            browserLocal.RemoveUserData(index);
             console.log("remove row");
         });
     });
+
+    index++;//TODO use for except foreach
 }

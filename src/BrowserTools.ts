@@ -125,6 +125,16 @@ class BrowserLocal {
         this.allData = [];
         this.SaveUserDataToLocalStorage();
     }
+
+    public RemoveUserData(index: number, savePermanent: boolean = false): void {
+        console.log(this.allData);
+        this.allData.splice(index, 1);
+        console.log(this.allData);
+
+        if (savePermanent) {
+            this.SaveUserDataToLocalStorage();
+        }
+    }
     
 
     private SaveUserDataToLocalStorage(): void {
