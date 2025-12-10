@@ -23,10 +23,13 @@ loadUserDataButton.addEventListener('click', function (e) {
     // const userData: BrowserTools.UserData[] = browserLocal.GetAllUserData();
     // userdataText.textContent = userData[0]?.userName ?? null;
     // console.log(userData[0]?.userName + "user");
+    RedrawTable();
+});
 
+function RedrawTable(): void {
     ClearUserDataTable();
     CreateElements();
-});
+}
 
 function ClearUserDataTable(): void {
     while (userdataText.firstChild) {
@@ -66,33 +69,40 @@ function CreateElements(): void {
             const newElement = document.createElement("div");
             newElement.classList.add("data-row");
 
-            elements[index] = newElement
+            elements[index] = newElement;
         }
 
-        setTextContent(elements[0], data.userName)
-        setTextContent(elements[1], data.dateBirth.toString())
-        setTextContent(elements[2], data.distroName)
-        setTextContent(elements[3], data.basePackages)
-        setTextContent(elements[4], data.auditory)
-        setTextContent(elements[5], data.philosofy)
-        setTextContent(elements[6], data.initSystem.toString())
-        setTextContent(elements[7], data.desktopEnvironment)
-        setTextContent(elements[8], data.basePackages)
-        setTextContent(elements[9], data.typeOfUpdate.toString())
-        setTextContent(elements[10], data.license)
-        setTextContent(elements[11], "")
+        setTextContent(elements[0], data.userName);
+        setTextContent(elements[1], data.dateBirth.toString());
+        setTextContent(elements[2], data.distroName);
+        setTextContent(elements[3], data.basePackages);
+        setTextContent(elements[4], data.auditory);
+        setTextContent(elements[5], data.philosofy);
+        setTextContent(elements[6], data.initSystem.toString());
+        setTextContent(elements[7], data.desktopEnvironment);
+        setTextContent(elements[8], data.basePackages);
+        setTextContent(elements[9], data.typeOfUpdate.toString());
+        setTextContent(elements[10], data.license);
+        // setTextContent(elements[11], data.packageManager.toString())
+        setTextContent(elements[11], "packageManager"); //not working a bit
 
         elements.forEach(element => {
             console.log(element.classList.item(0));
             newRow.appendChild(element);
         });
+
+        const deleteRowButton: HTMLButtonElement = document.createElement("button");
+        deleteRowButton.textContent = "Delete";
+        deleteRowButton.classList.add("button");
+
+        newRow.appendChild(deleteRowButton);
+
         newRow.classList.add("table-row");
 
         userdataText.appendChild(newRow);
+        deleteRowButton.addEventListener('click', function (e) {
+            userdataText.removeChild(newRow);
+            console.log("remove row");
+        });
     });
-
-    // rows.forEach(element => {
-    //     userdataText.appendChild(element);
-    // });
-
 }
