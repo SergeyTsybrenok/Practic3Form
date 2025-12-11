@@ -240,6 +240,22 @@ img:hover {
     background-color: var(--Teal);
 }
 
+.delete-button {
+    background-color: var(--Maroon);
+}
+
+.delete-button:hover {
+    background-color: color-mix(in srgb, var(--Maroon) 100%, red 50%);
+}
+
+.remove-button {
+    background-color: var(--Mauve);
+}
+
+.remove-button:hover {
+    background-color: color-mix(in srgb, var(--Mauve) 100%, var(--Blue) 80%);
+}
+
 .notify-text {
     font-weight: bold;
     white-space: pre-wrap;

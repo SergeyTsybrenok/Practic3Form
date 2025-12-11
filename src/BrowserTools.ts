@@ -89,7 +89,6 @@ class BrowserLocal {
     private static instance: BrowserLocal;
     private allData: UserData[] = [];
 
-    //save /load user data to localStorage
     public static getInstance(): BrowserLocal {
         if (!BrowserLocal.instance) {
             BrowserLocal.instance = new BrowserLocal();
@@ -128,6 +127,7 @@ class BrowserLocal {
 
     public RemoveUserData(index: number, savePermanent: boolean = false): void {
         console.log(this.allData);
+        console.log(index);
         this.allData.splice(index, 1);
         console.log(this.allData);
 

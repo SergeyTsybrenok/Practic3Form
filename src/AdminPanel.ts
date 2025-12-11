@@ -60,9 +60,10 @@ function CreateElements(): void {
 
     const rows: HTMLElement[] = new Array<HTMLElement>();
 
-    let index: number = 0; //TODO use for except foreach
+    let indexG: number = 0; //TODO use for except foreach
     userData.forEach(data => {
         const newRow = document.createElement("div");
+        console.log(indexG);
 
         const elements: HTMLElement[] = new Array<HTMLElement>(12);
 
@@ -94,19 +95,36 @@ function CreateElements(): void {
 
         const deleteRowButton: HTMLButtonElement = document.createElement("button");
         deleteRowButton.textContent = "Delete";
-        deleteRowButton.classList.add("button");
+        deleteRowButton.classList.add("button", "delete-button");
+        deleteRowButton.title = "Remove current row and save new table"
+
+        const newIndex: number = indexG; //Create new variable for bug
+        // Вкратце: indexG перезаписываемая переменная и метод RemoveUserData будет брать именно переменную, а учитывая, что тут в моменте создается вся таблица
+        // то будет использована последняя (зависит от рамера таблицы), поэтому создаем новую переменную и используем ее
+        deleteRowButton.addEventListener('click', function (e) {
+            userdataText.removeChild(newRow);
+            browserLocal.RemoveUserData(newIndex, true); // тут
+            console.log("Delete row");
+        });
+
+        //TODO mv to function
+        const removeRowButton: HTMLButtonElement = document.createElement("button");
+        removeRowButton.textContent = "Remove";
+        removeRowButton.classList.add("button", "remove-button");
+        removeRowButton.title = "Remove current row without save"
+
+        removeRowButton.addEventListener('click', function (e) {
+            userdataText.removeChild(newRow);
+            console.log("remove row");
+        });
 
         newRow.appendChild(deleteRowButton);
+        newRow.appendChild(removeRowButton);
 
         newRow.classList.add("table-row");
 
         userdataText.appendChild(newRow);
-        deleteRowButton.addEventListener('click', function (e) {
-            userdataText.removeChild(newRow);
-            browserLocal.RemoveUserData(index);
-            console.log("remove row");
-        });
     });
 
-    index++;//TODO use for except foreach
+    indexG++;//TODO use for except foreach
 }
