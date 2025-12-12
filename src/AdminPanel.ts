@@ -83,10 +83,7 @@ function CreateElements(): void {
             newRow.appendChild(element);
         });
 
-        const deleteRowButton: HTMLButtonElement = document.createElement("button");
-        deleteRowButton.textContent = "Delete";
-        deleteRowButton.classList.add("button",  "table-button", "delete-button");
-        deleteRowButton.title = "Remove current row and save new table"
+        const deleteRowButton: HTMLButtonElement = CreateButton("Delete", "delete-button", "Remove current row and save new table");
 
         const newIndex: number = indexG; //Create new variable for bug
         // Вкратце: indexG перезаписываемая переменная и метод RemoveUserData будет брать именно переменную, а учитывая, что тут в моменте создается вся таблица
@@ -97,11 +94,7 @@ function CreateElements(): void {
             console.log("Delete row", newIndex);
         });
 
-        //TODO mv to function
-        const removeRowButton: HTMLButtonElement = document.createElement("button");
-        removeRowButton.textContent = "Remove";
-        removeRowButton.classList.add("button", "table-button", "remove-button");
-        removeRowButton.title = "Remove current row without save"
+        const removeRowButton: HTMLButtonElement = CreateButton("Remove", "remove-button", "Remove current row without save");
 
         removeRowButton.addEventListener('click', function (e) {
             userdataText.removeChild(newRow);
@@ -117,5 +110,13 @@ function CreateElements(): void {
 
         indexG++;//TODO use "for" loop instead of "foreach"
     });
+}
 
+function CreateButton(text: string, title: string, additiveClass: string): HTMLButtonElement {
+    const newButton: HTMLButtonElement = document.createElement("button");
+    newButton.textContent = text;
+    newButton.classList.add("button", "table-button", additiveClass);
+    newButton.title = title;
+
+    return newButton;
 }

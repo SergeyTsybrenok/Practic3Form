@@ -62,10 +62,7 @@ function CreateElements() {
             console.log(element.classList.item(0));
             newRow.appendChild(element);
         });
-        const deleteRowButton = document.createElement("button");
-        deleteRowButton.textContent = "Delete";
-        deleteRowButton.classList.add("button", "table-button", "delete-button");
-        deleteRowButton.title = "Remove current row and save new table";
+        const deleteRowButton = CreateButton("Delete", "delete-button", "Remove current row and save new table");
         const newIndex = indexG; //Create new variable for bug
         // Вкратце: indexG перезаписываемая переменная и метод RemoveUserData будет брать именно переменную, а учитывая, что тут в моменте создается вся таблица
         // то будет использована последняя (зависит от рамера таблицы), поэтому создаем новую переменную и используем ее
@@ -74,11 +71,7 @@ function CreateElements() {
             browserLocal.RemoveUserData(newIndex, true); // тут
             console.log("Delete row", newIndex);
         });
-        //TODO mv to function
-        const removeRowButton = document.createElement("button");
-        removeRowButton.textContent = "Remove";
-        removeRowButton.classList.add("button", "table-button", "remove-button");
-        removeRowButton.title = "Remove current row without save";
+        const removeRowButton = CreateButton("Remove", "remove-button", "Remove current row without save");
         removeRowButton.addEventListener('click', function (e) {
             userdataText.removeChild(newRow);
             console.log("remove row");
@@ -89,5 +82,12 @@ function CreateElements() {
         userdataText.appendChild(newRow);
         indexG++; //TODO use "for" loop instead of "foreach"
     });
+}
+function CreateButton(text, title, additiveClass) {
+    const newButton = document.createElement("button");
+    newButton.textContent = text;
+    newButton.classList.add("button", "table-button", additiveClass);
+    newButton.title = title;
+    return newButton;
 }
 //# sourceMappingURL=AdminPanel.js.map
