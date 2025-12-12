@@ -42,6 +42,12 @@ function AddError (newError: string): void { //TODO move to class
     errorText.textContent += `\n ${newError}` 
 }
 
+function CheckDate(date: Date) {
+    const currentDate: Date = new Date();
+
+    return currentDate === date;
+}
+
 function HaveError (): boolean {
     if (errorText.textContent != "") {
         return true
@@ -88,6 +94,8 @@ function TrySend () {
     ClearErrorText();
 
     CheckInputNotNull(inputs);
+    const great = CheckDate(mainForm.userDateBirth)
+    console.log(great);
 
     if (!HaveError()) {
         const userData: BrowserTools.UserData = GetUserDataFromForm(mainForm);

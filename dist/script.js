@@ -26,6 +26,10 @@ function ClearNotification() {
 function AddError(newError) {
     errorText.textContent += `\n ${newError}`;
 }
+function CheckDate(date) {
+    const currentDate = new Date();
+    return currentDate === date;
+}
 function HaveError() {
     if (errorText.textContent != "") {
         return true;
@@ -54,6 +58,8 @@ function GetUserDataFromForm(form) {
 function TrySend() {
     ClearErrorText();
     CheckInputNotNull(inputs);
+    const great = CheckDate(mainForm.userDateBirth);
+    console.log(great);
     if (!HaveError()) {
         const userData = GetUserDataFromForm(mainForm);
         browserLocal.SaveUserData(userData);
