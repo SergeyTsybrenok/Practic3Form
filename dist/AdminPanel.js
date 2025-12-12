@@ -1,23 +1,16 @@
 import * as BrowserTools from "./BrowserTools.js";
-
-
 //#region CONSTANTS
-const browserLocal: BrowserTools.BrowserLocal = BrowserTools.BrowserLocal.getInstance();
-
-
-const backButton = document.getElementById('backButton') as HTMLButtonElement;
-const loadUserDataButton = document.getElementById('loadUserDataButton') as HTMLButtonElement;
-const userdataText = document.getElementById('userdataText') as HTMLElement;
+const browserLocal = BrowserTools.BrowserLocal.getInstance();
+const backButton = document.getElementById('backButton');
+const loadUserDataButton = document.getElementById('loadUserDataButton');
+const userdataText = document.getElementById('userdataText');
 //#endregion
-
 document.addEventListener('DOMContentLoaded', function (e) {
     browserLocal.Initializate();
 });
-
 backButton.addEventListener('click', function (e) {
     window.location.href = "index.html";
 });
-
 loadUserDataButton.addEventListener('click', function (e) {
     console.log("Try load data");
     // const userData: BrowserTools.UserData[] = browserLocal.GetAllUserData();
@@ -25,45 +18,33 @@ loadUserDataButton.addEventListener('click', function (e) {
     // console.log(userData[0]?.userName + "user");
     RedrawTable();
 });
-
-function RedrawTable(): void {
+function RedrawTable() {
     ClearUserDataTable();
     CreateElements();
 }
-
-function ClearUserDataTable(): void {
+function ClearUserDataTable() {
     while (userdataText.firstChild) {
-        userdataText.removeChild(userdataText.firstChild)
+        userdataText.removeChild(userdataText.firstChild);
     }
 }
-
-
-const setTextContent = (element: Element | null | undefined, text: string) => {
+const setTextContent = (element, text) => {
     if (element instanceof HTMLElement && text != undefined) {
         element.textContent = text;
     }
 };
-
-
-function CreateElements(): void {
-    const userData: BrowserTools.UserData[] = browserLocal.GetAllUserData();
-
-    const rows: HTMLElement[] = new Array<HTMLElement>();
-
-    let indexG: number = 0; //TODO use for except foreach
+function CreateElements() {
+    const userData = browserLocal.GetAllUserData();
+    const rows = new Array();
+    let indexG = 0; //TODO use for except foreach
     userData.forEach(data => {
         const newRow = document.createElement("div");
         console.log(indexG);
-
-        const elements: HTMLElement[] = new Array<HTMLElement>(12);
-
+        const elements = new Array(12);
         for (let index = 0; index < elements.length; index++) {
             const newElement = document.createElement("div");
             newElement.classList.add("data-row");
-
             elements[index] = newElement;
         }
-
         setTextContent(elements[0], data.userName);
         setTextContent(elements[1], data.dateBirth.toString());
         setTextContent(elements[2], data.distroName);
@@ -77,18 +58,15 @@ function CreateElements(): void {
         setTextContent(elements[10], data.license);
         // setTextContent(elements[11], data.packageManager.toString())
         setTextContent(elements[11], "packageManager"); //not working a bit
-
         elements.forEach(element => {
             console.log(element.classList.item(0));
             newRow.appendChild(element);
         });
-
-        const deleteRowButton: HTMLButtonElement = document.createElement("button");
+        const deleteRowButton = document.createElement("button");
         deleteRowButton.textContent = "Delete";
-        deleteRowButton.classList.add("button",  "table-button", "delete-button");
-        deleteRowButton.title = "Remove current row and save new table"
-
-        const newIndex: number = indexG; //Create new variable for bug
+        deleteRowButton.classList.add("button", "table-button", "delete-button");
+        deleteRowButton.title = "Remove current row and save new table";
+        const newIndex = indexG; //Create new variable for bug
         // Вкратце: indexG перезаписываемая переменная и метод RemoveUserData будет брать именно переменную, а учитывая, что тут в моменте создается вся таблица
         // то будет использована последняя (зависит от рамера таблицы), поэтому создаем новую переменную и используем ее
         deleteRowButton.addEventListener('click', function (e) {
@@ -96,26 +74,20 @@ function CreateElements(): void {
             browserLocal.RemoveUserData(newIndex, true); // тут
             console.log("Delete row", newIndex);
         });
-
         //TODO mv to function
-        const removeRowButton: HTMLButtonElement = document.createElement("button");
+        const removeRowButton = document.createElement("button");
         removeRowButton.textContent = "Remove";
         removeRowButton.classList.add("button", "table-button", "remove-button");
-        removeRowButton.title = "Remove current row without save"
-
+        removeRowButton.title = "Remove current row without save";
         removeRowButton.addEventListener('click', function (e) {
             userdataText.removeChild(newRow);
             console.log("remove row");
         });
-
         newRow.appendChild(deleteRowButton);
         newRow.appendChild(removeRowButton);
-
         newRow.classList.add("table-row");
-
         userdataText.appendChild(newRow);
-
-        indexG++;//TODO use "for" loop instead of "foreach"
+        indexG++; //TODO use "for" loop instead of "foreach"
     });
-
 }
+//# sourceMappingURL=AdminPanel.js.map
