@@ -62,7 +62,7 @@ function CreateElements() {
             console.log(element.classList.item(0));
             newRow.appendChild(element);
         });
-        const deleteRowButton = CreateButton("Delete", "delete-button", "Remove current row and save new table");
+        const deleteRowButton = CreateButton("Delete", "Remove current row and save new table", "delete-button");
         const newIndex = indexG; //Create new variable for bug
         // Вкратце: indexG перезаписываемая переменная и метод RemoveUserData будет брать именно переменную, а учитывая, что тут в моменте создается вся таблица
         // то будет использована последняя (зависит от рамера таблицы), поэтому создаем новую переменную и используем ее
@@ -71,7 +71,7 @@ function CreateElements() {
             browserLocal.RemoveUserData(newIndex, true); // тут
             console.log("Delete row", newIndex);
         });
-        const removeRowButton = CreateButton("Remove", "remove-button", "Remove current row without save");
+        const removeRowButton = CreateButton("Remove", "Remove current row without save", "remove-button");
         removeRowButton.addEventListener('click', function (e) {
             userdataText.removeChild(newRow);
             console.log("remove row");

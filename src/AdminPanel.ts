@@ -83,7 +83,7 @@ function CreateElements(): void {
             newRow.appendChild(element);
         });
 
-        const deleteRowButton: HTMLButtonElement = CreateButton("Delete", "delete-button", "Remove current row and save new table");
+        const deleteRowButton: HTMLButtonElement = CreateButton("Delete", "Remove current row and save new table", "delete-button",);
 
         const newIndex: number = indexG; //Create new variable for bug
         // Вкратце: indexG перезаписываемая переменная и метод RemoveUserData будет брать именно переменную, а учитывая, что тут в моменте создается вся таблица
@@ -94,7 +94,7 @@ function CreateElements(): void {
             console.log("Delete row", newIndex);
         });
 
-        const removeRowButton: HTMLButtonElement = CreateButton("Remove", "remove-button", "Remove current row without save");
+        const removeRowButton: HTMLButtonElement = CreateButton("Remove", "Remove current row without save", "remove-button",);
 
         removeRowButton.addEventListener('click', function (e) {
             userdataText.removeChild(newRow);
