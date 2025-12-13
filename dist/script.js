@@ -28,7 +28,15 @@ function AddError(newError) {
 }
 function CheckDate(date) {
     const currentDate = new Date();
-    return currentDate === date;
+    try {
+        const userDate = new Date(date);
+        if (userDate.getTime() >= currentDate.getTime()) {
+            AddError("You can't register without being born first.");
+        }
+    }
+    catch (error) {
+        AddError(error);
+    }
 }
 function HaveError() {
     if (errorText.textContent != "") {
@@ -58,7 +66,9 @@ function GetUserDataFromForm(form) {
 function TrySend() {
     ClearErrorText();
     CheckInputNotNull(inputs);
-    const great = CheckDate(mainForm.userDateBirth);
+    console.log(mainForm.userDateBirth.value);
+    console.log("test");
+    const great = CheckDate(mainForm.userDateBirth.value);
     console.log(great);
     if (!HaveError()) {
         const userData = GetUserDataFromForm(mainForm);
