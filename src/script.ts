@@ -54,6 +54,14 @@ function CheckDate(date: string): void {
     }
 }
 
+function CheckName(name:string) {
+    const clearName: string = name.trim()
+
+    if (clearName[0]?.toUpperCase() !== clearName[0]) {
+        AddError("The first letter of the name must begin with a capital letter!")
+    }
+}
+
 function HaveError (): boolean {
     if (errorText.textContent != "") {
         return true
@@ -81,16 +89,16 @@ function ClearErrorText () {
 
 function GetUserDataFromForm (form: HTMLFormElement): UserDataInstance {
     const newUser: UserDataInstance = new BrowserTools.UserData(
-        form.userName.value as string,
-        form.distroName.value as string,
+        form.userName.value.trim() as string,
+        form.distroName.value.trim() as string,
         form.linux.value as BrowserTools.BasedOn,
         auditoryCheckbox.GetAllCheckedCheckboxes(),
-        form.philosofy.value as string,
+        form.philosofy.value.trim() as string,
         form.init.value as BrowserTools.InitSystem,
         desktopEnvirenmentCheckbox.GetAllCheckedCheckboxes(),
-        form.basepackages.value as string,
+        form.basepackages.value.trim() as string,
         form.lts_rolling.value as BrowserTools.TypeOfUpdate,
-        form.license.value as string,
+        form.license.value.trim() as string,
         form.packageManager as BrowserTools.PakageManager);
 
         return newUser;
@@ -100,10 +108,8 @@ function TrySend () {
     ClearErrorText();
 
     CheckInputNotNull(inputs);
-    console.log(mainForm.userDateBirth.value);
-    console.log("test");
-    const great = CheckDate(mainForm.userDateBirth.value)
-    console.log(great);
+    CheckDate(mainForm.userDateBirth.value)
+    CheckName(mainForm.userName.value)
 
     if (!HaveError()) {
         const userData: BrowserTools.UserData = GetUserDataFromForm(mainForm);
