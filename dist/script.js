@@ -27,6 +27,11 @@ function AddError(newError) {
     errorText.textContent += `\n ${newError}`;
 }
 function CheckDate(date) {
+    console.log("Date: " + date);
+    if (date === null || date == undefined || date === "") {
+        AddError("Please write you date of birth");
+        return;
+    }
     const currentDate = new Date();
     try {
         const userDate = new Date(date);
@@ -66,7 +71,7 @@ function ClearErrorText() {
     errorText.textContent = "";
 }
 function GetUserDataFromForm(form) {
-    const newUser = new BrowserTools.UserData(form.userName.value.trim(), form.distroName.value.trim(), form.linux.value, auditoryCheckbox.GetAllCheckedCheckboxes(), form.philosofy.value.trim(), form.init.value, desktopEnvirenmentCheckbox.GetAllCheckedCheckboxes(), form.basepackages.value.trim(), form.lts_rolling.value, form.license.value.trim(), form.packageManager);
+    const newUser = new BrowserTools.UserData(form.userName.value.trim(), form.distroName.value.trim(), form.linux.value, auditoryCheckbox.GetAllCheckedCheckboxes(), form.philosofy.value.trim(), form.init.value, desktopEnvirenmentCheckbox.GetAllCheckedCheckboxes(), form.basepackages.value.trim(), form.lts_rolling.value, form.license.value.trim(), form.manager.value);
     return newUser;
 }
 function TrySend() {

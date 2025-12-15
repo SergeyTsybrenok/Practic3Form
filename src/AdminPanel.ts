@@ -12,6 +12,7 @@ const userdataText = document.getElementById('userdataText') as HTMLElement;
 
 document.addEventListener('DOMContentLoaded', function (e) {
     browserLocal.Initializate();
+    RedrawTable();
 });
 
 backButton.addEventListener('click', function (e) {
@@ -19,10 +20,6 @@ backButton.addEventListener('click', function (e) {
 });
 
 loadUserDataButton.addEventListener('click', function (e) {
-    console.log("Try load data");
-    // const userData: BrowserTools.UserData[] = browserLocal.GetAllUserData();
-    // userdataText.textContent = userData[0]?.userName ?? null;
-    // console.log(userData[0]?.userName + "user");
     RedrawTable();
 });
 
@@ -75,8 +72,7 @@ function CreateElements(): void {
         setTextContent(elements[8], data.basePackages);
         setTextContent(elements[9], data.typeOfUpdate.toString());
         setTextContent(elements[10], data.license);
-        // setTextContent(elements[11], data.packageManager.toString())
-        setTextContent(elements[11], "packageManager"); //not working a bit
+        setTextContent(elements[11], data.packageManager.toString())
 
         elements.forEach(element => {
             console.log(element.classList.item(0));

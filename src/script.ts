@@ -30,19 +30,25 @@ document.addEventListener('DOMContentLoaded', function (e) {
         browserLocal.Initializate();
 });
 
-function AddNotification (newNotification: string): void { //TODO move to class
+function AddNotification(newNotification: string): void { //TODO move to class
     notifyText.textContent += `\n ${newNotification}`;
 }
 
-function ClearNotification (): void {
+function ClearNotification(): void {
     notifyText.textContent = "";
 }
 
-function AddError (newError: string): void { //TODO move to class
+function AddError(newError: string): void { //TODO move to class
     errorText.textContent += `\n ${newError}` 
 }
 
 function CheckDate(date: string): void {
+    console.log("Date: " + date);
+    if (date === null || date == undefined || date === "") {
+        AddError("Please write you date of birth")
+        return
+    }
+
     const currentDate: Date = new Date();
     try {
         const userDate = new Date(date);
@@ -62,7 +68,7 @@ function CheckName(name:string) {
     }
 }
 
-function HaveError (): boolean {
+function HaveError(): boolean {
     if (errorText.textContent != "") {
         return true
     }
@@ -72,7 +78,7 @@ function HaveError (): boolean {
 }
 
 // TODO mv to initialize all init inputs
-function CheckInputNotNull (inputs: string[]) {
+function CheckInputNotNull(inputs: string[]) {
     inputs.forEach(inputString => {
         const currentInput = document.getElementById(inputString) as HTMLInputElement; //this one
         const val = currentInput.value;
@@ -83,11 +89,11 @@ function CheckInputNotNull (inputs: string[]) {
     });
 }
 
-function ClearErrorText () {
+function ClearErrorText() {
     errorText.textContent = "";
 }
 
-function GetUserDataFromForm (form: HTMLFormElement): UserDataInstance {
+function GetUserDataFromForm(form: HTMLFormElement): UserDataInstance {
     const newUser: UserDataInstance = new BrowserTools.UserData(
         form.userName.value.trim() as string,
         form.distroName.value.trim() as string,
@@ -99,12 +105,12 @@ function GetUserDataFromForm (form: HTMLFormElement): UserDataInstance {
         form.basepackages.value.trim() as string,
         form.lts_rolling.value as BrowserTools.TypeOfUpdate,
         form.license.value.trim() as string,
-        form.packageManager as BrowserTools.PakageManager);
+        form.manager.value as BrowserTools.PakageManager);
 
         return newUser;
 }
 
-function TrySend () {
+function TrySend() {
     ClearErrorText();
 
     CheckInputNotNull(inputs);
